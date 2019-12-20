@@ -16,9 +16,9 @@ const { SubMenu } = Menu;
 function Home (props) {
 
   const [ collapsed, setCollapsed ] = useState(false)
-  const [ theme, setTheme ] = useState('light')
+  const [ theme ] = useState('light')
 
-  const onCollapsed = collapsed => setCollapsed(collapsed)
+  const onCollapsed = () => setCollapsed(!collapsed)
 
   const handleClickArticle = e => {
     if (e.key === 'addArticle') {
@@ -37,7 +37,7 @@ function Home (props) {
       withCredentials:true
     }).then(
       res=>{
-        if(res.data.data=='退出成功')
+        if(res.data.data === '退出成功')
         {
           message.success('已退出')
           setTimeout(()=>{
@@ -96,10 +96,18 @@ function Home (props) {
       { sider }
       <Layout>
         <Header className="header" >
-          <Breadcrumb>
-            <Breadcrumb.Item>后台管理</Breadcrumb.Item>
-            <Breadcrumb.Item>工作台</Breadcrumb.Item>
-          </Breadcrumb>
+          <section>
+            <div className="sider-trigger" onClick={onCollapsed}>
+              { collapsed
+                ? <Icon type="menu-unfold" className="menu-fold"/>
+                : <Icon type="menu-fold" className="menu-fold"/>
+              }
+            </div>
+            <Breadcrumb>
+              <Breadcrumb.Item>后台管理</Breadcrumb.Item>
+              <Breadcrumb.Item>工作台</Breadcrumb.Item>
+            </Breadcrumb>
+          </section>
 
           <Dropdown className="header-avatar" overlay={avatarMenu}>
             <div>

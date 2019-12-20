@@ -6,10 +6,26 @@
 .header {
   /* style={{ display: 'flex', background: '#fff', padding: 0 }} */
   display: flex;
-  background-color: #fff;
-  padding: 0 16px;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  padding: 0;
+  padding-right: 16px;
+}
+.header section {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  height: 100%;
+}
+.header .sider-trigger {
+  margin-right: 8px;
+  font-size: 20px;
+  padding: 0 24px;
+  cursor: pointer;
+}
+.header .sider-trigger:hover {
+  background-color: rgba(0,0,0,.025);
 }
 .header-avatar {
   padding: 0 8px;
@@ -20,5 +36,5 @@
   margin: 0 4px;
 }
 .header-avatar:hover {
-  background-color: rgba(0,0,0,.025);;
+  background-color: rgba(0,0,0,.025);
 }
