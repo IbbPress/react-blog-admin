@@ -6,7 +6,7 @@ import Login from "./Login";
 function Main () {
   return (
     <Router>
-      <Route path="/" exact component={Home} />
+      <Route path="/index/" component={Home} />
       <Route path="/login/" exact component={Login} />
     </Router>
   )

@@ -1,0 +1,24 @@
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+.header {
+  /* style={{ display: 'flex', background: '#fff', padding: 0 }} */
+  display: flex;
+  background-color: #fff;
+  padding: 0 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-avatar {
+  padding: 0 8px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.header-avatar > * {
+  margin: 0 4px;
+}
+.header-avatar:hover {
+  background-color: rgba(0,0,0,.025);;
+}

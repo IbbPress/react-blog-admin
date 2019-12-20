@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Input, Icon, Button, Spin, message } from "antd";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ function Login (props) {
 
   const [ userName, setUserName ] = useState('')
   const [ password, setPassword ] = useState('')
-  const [ isLoading, setIsLoading ] = useState('')
+  const [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
     // check login status
@@ -77,6 +77,7 @@ function Login (props) {
             id="userName"
             size="large"
             placeholder="Enter your userName"
+            autoComplete="false"
             prefix={ <Icon type="user" style={{ color: 'rgba(0,0,0,.25' }} /> }
             onChange={ e=>{ setUserName(e.target.value) } }
             style={{ marginBottom: 30 }}
@@ -86,7 +87,6 @@ function Login (props) {
             id="password"
             size="large"
             placeholder="Enter your password"
-            autoComplete={false}
             prefix={ <Icon type="key" style={{ color: 'rgba(0,0,0,.25' }} /> }
             onChange={ e=>{ setPassword(e.target.value) } }
             style={{ marginBottom: 30 }}
