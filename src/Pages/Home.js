@@ -1,17 +1,20 @@
 import React,{useState} from 'react';
 import { Layout, Menu, Breadcrumb, Dropdown, Icon ,message, Avatar } from 'antd';
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import axios from 'axios'
 
 import ArticleList from "./Article/List";
 import ArticleAdd from "./Article/Add";
 import Dashboard from "./Dashboard";
+import User from "./User";
+import Tags from "./Tags";
+import Links from "./Links";
 
 import  servicePath  from '../config/apiUrl'
 import "../static/styles/home.css";
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 function Home (props) {
 
@@ -20,13 +23,13 @@ function Home (props) {
 
   const onCollapsed = () => setCollapsed(!collapsed)
 
-  const handleClickArticle = e => {
-    if (e.key === 'addArticle') {
-      props.history.push('/index/add')
-    } else {
-      props.history.push('/index/list')
-    }
-  }
+  // const handleClickArticle = e => {
+  //   if (e.key === 'addArticle') {
+  //     props.history.push('/index/add')
+  //   } else {
+  //     props.history.push('/index/list')
+  //   }
+  // }
 
   const handleLogout = () => {
     localStorage.removeItem('openId')
@@ -51,12 +54,50 @@ function Home (props) {
     <Sider theme={theme} collapsible collapsed={collapsed} onCollapse={onCollapsed}>
       <div className="logo">blog</div>
       <Menu defaultSelectedKeys={ ['1'] } mode="inline">
-        <Menu.Item key="1">
-          <Icon type="pie-chart" />
-          <span>工作台</span>
+
+        <Menu.Item key="dashboard">
+          <Link to="/index">
+            <Icon type="dashboard" />
+            <span>工作台</span>
+          </Link>
         </Menu.Item>
         
-        <SubMenu
+        <Menu.Item key="addArticle">
+          <Link to="/index/add">
+            <Icon type="edit" />
+            <span>写文章</span>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="articleList">
+          <Link to="/index/list">
+            <Icon type="unordered-list" />
+            <span>文章列表</span>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="tags">
+          <Link to="/index/tags">
+            <Icon type="tags" />
+            <span>标签</span>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="link">
+          <Link to="/index/links">
+            <Icon type="link" />
+            <span>友链管理</span>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="user">
+          <Link to="/index/user">
+            <Icon type="user" />
+            <span>个人中心</span>
+          </Link>
+        </Menu.Item>
+
+        {/* <SubMenu
           key="sub1"
           onClick={handleClickArticle}
           title={
@@ -66,9 +107,7 @@ function Home (props) {
             </span>
           }
         >
-          <Menu.Item key="addArticle">添加文章</Menu.Item>
-          <Menu.Item key="articleList">文章列表</Menu.Item>
-        </SubMenu>
+        </SubMenu> */}
       </Menu>
     </Sider>
   )
@@ -124,6 +163,9 @@ function Home (props) {
               <Route path="/index/add/" exact   component={ArticleAdd} />
               <Route path="/index/add/:id"  exact   component={ArticleAdd} />
               <Route path="/index/list/"   component={ArticleList} />
+              <Route path="/index/links"   component={Links} />
+              <Route path="/index/user"   component={User} />
+              <Route path="/index/tags"   component={Tags} />
             </div>
           </div>
 
