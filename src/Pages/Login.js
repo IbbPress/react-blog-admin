@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Input, Icon, Button, Spin, message } from "antd";
 import axios from "axios";
 
-import servicePath from "../config/apiUrl";
+// import servicePath from "../config/apiUrl";
 import "../static/styles/login.css";
 
 function Login (props) {
@@ -18,7 +18,7 @@ function Login (props) {
     if (openId) {
       axios({
         method: 'post',
-        url: servicePath.checkOpenId,
+        url: 'servicePath.checkOpenId',
         data: dataProps,
         withCredentials: true,
         header:{ 'Access-Control-Allow-Origin':'*' }
@@ -46,7 +46,7 @@ function Login (props) {
     let dataProps = { userName, password }
     axios({
       method: 'post',
-      url:servicePath.checkLogin,
+      url: 'servicePath.checkLogin',
       data: dataProps,
       header: { 'Access-Control-Allow-Origin':'*' },
       withCredentials: true

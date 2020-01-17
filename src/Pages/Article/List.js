@@ -1,87 +1,76 @@
-import React, { useState } from 'react';
-import { Button, Table, Tag, Popconfirm } from 'antd';
-// import { getArticleList } from "../../config/api";
-
+import React, { useState, useEffect } from 'react';
+import { Button, Table, Popconfirm, Icon } from 'antd';
+import { getArticleList, delPost } from "../../config/api";
+import dayjs from 'dayjs'
 const { Column } = Table;
-const data = [
-  {
-    id: '1',
-    firstName: 'John',
-    lastName: 'Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    id: '2',
-    firstName: 'Jim',
-    lastName: 'Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    id: '3',
-    firstName: 'Joe',
-    lastName: 'Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
-
 function List (props) {
 
-  const [ list ] = useState(data)
-  // const [ loading, toggleLoading ] = useState(false)
-  // const getList = async () => {
-  //   try {
-  //     toggleLoading(!loading)
-  //     const resp = await getArticleList();
-  //     setList(resp.data.list)
-  //   } catch (error) {
+  const [ list, setList ] = useState([])
+  const [ loading, setLoading ] = useState(false)
+  const getList = async () => {
+    try {
+      setLoading(true)
+      const resp = await getArticleList();
+      setList(resp.data)
+    } catch (error) {
       
-  //   } finally {
-  //     toggleLoading(!loading)
-  //   }
-  // }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const updateArticle = (id) => {
     props.history.push(`/index/add/${id}`)
   }
-  const delArticle = (id) => {
-    console.log(id);
+  const delArticle = async (id) => {
+    try {
+      const resp = await delPost(id);
+      console.log('delete post resp: ', id, resp);
+    } catch (error) {
+      
+    }
   }
 
   // setList(data);
+  useEffect(() => {
+    getList();
+  }, [])
 
-  const tags = tags => (
-    <span>
-      {tags.map(tag => (
-        <Tag color="blue" key={tag}>
-          {tag}
-        </Tag>
-      ))}
-    </span>
-  )
+  // const tags = tags => (
+  //   <span>
+  //     {tags.map(tag => (
+  //       <Tag color="blue" key={tag}>
+  //         {tag}
+  //       </Tag>
+  //     ))}
+  //   </span>
+  // )
   const actions = (text, record) => (
     <span>
       <Button type="primary" onClick={()=>{updateArticle(record.id)}}>编辑</Button>&nbsp;
       {/* <Divider type="vertical" /> */}
-      <Popconfirm title="Sure to delete?" onConfirm={()=>{delArticle(record.id)}}>
+      <Popconfirm
+        title="确定要删除吗？"
+        icon={<Icon type="question-circle-o" style={{ color: 'red' }} />}
+        okText="删除"
+        okType="danger"
+        cancelText="再想想"
+        onConfirm={()=>{delArticle(record.id)}}>
         <Button>删除</Button>
       </Popconfirm>
     </span>
+  )
+  const time = (add_time, record) => (
+    dayjs.unix(record.add_time).format('YYYY-MM-DD')
   )
 
   return (
     <div className="article-list">
       <h1>文章列表</h1>
-      <Table dataSource={list} >
-        <Column title="标题" dataIndex="firstName" key="firstName" />
-        <Column title="集数" dataIndex="age" key="age" />
-        <Column title="发布时间" dataIndex="address" key="address" />
-        <Column title="标签" dataIndex="tags" key="tags" render={tags} />
+      <Table dataSource={list} loading={loading} rowKey={record => record.id}>
+        <Column title="标题" dataIndex="title" key="title" />
+        <Column title="发布时间" dataIndex="add_time" render={time} />
+        <Column title="阅读次数" dataIndex="view_count" key="view_count" />
         <Column title="操作" key="action" render={actions} />
       </Table>
     </div>

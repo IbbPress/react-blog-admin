@@ -10,7 +10,7 @@ import User from "./User";
 import Tags from "./Tags";
 import Links from "./Links";
 
-import  servicePath  from '../config/apiUrl'
+// import  servicePath  from '../config/apiUrl'
 import "../static/styles/home.css";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -35,7 +35,7 @@ function Home (props) {
     localStorage.removeItem('openId')
     axios({
       method:'get',
-      url:servicePath.outLogin,
+      url: 'servicePath.outLogin',
       header:{ 'Access-Control-Allow-Origin':'*' },
       withCredentials:true
     }).then(
