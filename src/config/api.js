@@ -12,3 +12,5 @@ export const createPost = (payload) => POST('/post', payload)
 
 
 export const deleteArticle = (payload) => DELETE('/delArticle', payload)
+
+export const login = (payload) => POST('/login', payload)
