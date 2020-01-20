@@ -1,16 +1,15 @@
 import React,{useState} from 'react';
 import { Layout, Menu, Breadcrumb, Dropdown, Icon ,message, Avatar } from 'antd';
 import { Route, Link } from "react-router-dom";
-import axios from 'axios'
 
 import ArticleList from "./Article/List";
-import ArticleAdd from "./Article/Add";
+import ArticleAdd from "./Article/Edit";
 import Dashboard from "./Dashboard";
 import User from "./User";
 import Tags from "./Tags";
 import Links from "./Links";
 
-// import  servicePath  from '../config/apiUrl'
+import  { logout }  from '../config/api.js'
 import "../static/styles/home.css";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -31,24 +30,14 @@ function Home (props) {
   //   }
   // }
 
-  const handleLogout = () => {
-    localStorage.removeItem('openId')
-    axios({
-      method:'get',
-      url: 'servicePath.outLogin',
-      header:{ 'Access-Control-Allow-Origin':'*' },
-      withCredentials:true
-    }).then(
-      res=>{
-        if(res.data.data === '退出成功')
-        {
-          message.success('已退出')
-          setTimeout(()=>{
-            props.history.push('/')
-          },1000)
-        }
-      }
-    )
+  const handleLogout = async () => {
+    try {
+      const resp = await logout();
+      message.success(resp.desc);
+      props.history.push('/login')
+    } catch (error) {
+      
+    }
   }
   const sider = (
     <Sider theme={theme} collapsible collapsed={collapsed} onCollapse={onCollapsed}>
@@ -173,8 +162,6 @@ function Home (props) {
         <Footer style={{ textAlign: 'center' }}>blog</Footer>
       </Layout>
     </Layout>
-
-
   )
 }
 

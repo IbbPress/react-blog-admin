@@ -4,7 +4,8 @@ import axios from "axios";
 
 // import servicePath from "../config/apiUrl";
 import "../static/styles/login.css";
-import { login } from "../config/api";
+import { login } from "../config/api.js";
+import { welcome } from "../config/util.js"
 
 function Login (props) {
 
@@ -45,35 +46,14 @@ function Login (props) {
     
     try {
       setIsLoading(true);
-      const resp = await login({ userName, password });
-      console.log('login ok: ', resp);
+      await login({ userName, password });
+      message.success(`${welcome()}，欢迎回来`)
+      props.history.push('/index/list') 
     } catch (error) {
-      console.log('error', error.response);
+      message.success('登录失败')
     } finally {
       setIsLoading(false);
     }
-    // axios({
-    //   method: 'post',
-    //   url: 'servicePath.checkLogin',
-    //   data: dataProps,
-    //   header: { 'Access-Control-Allow-Origin':'*' },
-    //   withCredentials: true
-    // })
-    // .then(resp => {
-    //   setIsLoading(false);
-    //   if (resp.data.data === '登录成功') {
-    //     localStorage.setItem('openId',resp.data.openId)
-    //     props.history.push('/index')
-    //   } else {
-    //     message.error('用户名密码错误')
-    //   }
-    // })
-    // .catch(err => {
-    //   message.error('登录失败，请重试')
-    // })
-    // .finally (() => {
-    //   setIsLoading(false);
-    // })
   }
 
 

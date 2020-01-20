@@ -6,7 +6,7 @@ import {
   // Select,
   Button,
   // DatePicker,
-  // message
+  message
 } from 'antd'
 
 import dayjs from "dayjs";
@@ -34,41 +34,53 @@ function Add(props) {
   });
   const [ title, setTitle ] = useState('');
   const [ content, setContent ] = useState('');
-  const [ loading, setLoading ] = useState(false);
+  // const [ loading, setLoading ] = useState(false);
+
+
+
+  // const fetchPost = async () => {
+  //   let _id = props.match.params.id;
+  //   try {
+  //     setLoading(!loading)
+  //     const resp = await getPost(_id)
+  //     console.log(resp);
+  //     setPost(resp.data)
+  //     setTitle(resp.data.title)
+  //     setContent(resp.data.content)
+  //   } catch (error) {
+      
+  //   } finally {
+  //     setLoading(!loading)
+  //   }
+  // }
 
 
   useEffect(() => {
-    let _id = props.match.params.id;
-    // if (_id !=== id) {
-      // setId(id)
-    if (_id !== undefined) {
-      fetchPost(_id);
+    const fetchPost = async () => {
+      let _id = props.match.params.id;
+      if (_id === undefined) { return; }
+      try {
+        // setLoading(!loading)
+        const resp = await getPost(_id)
+        console.log(resp);
+        setPost(resp.data)
+        setTitle(resp.data.title)
+        setContent(resp.data.content)
+      } catch (error) {
+        
+      } finally {
+        // setLoading(!loading)
+      }
     }
-    // }
-  }, [])
-
-
-  const fetchPost = async id => {
-    try {
-      setLoading(!loading)
-      const resp = await getPost(id)
-      console.log(resp);
-      setPost(resp.data)
-      setTitle(resp.data.title)
-      setContent(resp.data.content)
-    } catch (error) {
-      
-    } finally {
-      setLoading(!loading)
-    }
-  }
+    fetchPost();
+  }, [props.match.params.id])
 
   const handleContentChange = value => {
-    console.log(value);
+    // console.log(value);
     setContent(value);
   };
   const handleTitleChange = value => {
-    console.log(value);
+    // console.log(value);
     setTitle(value);
   };
 
@@ -84,8 +96,10 @@ function Add(props) {
       let resp;
       if (payload.id !== undefined) {
         resp = await updatePost(payload);
+        message.success('更新成功')
       } else {
         resp = await createPost(payload)
+        message.success('创建成功')
       }
       console.log('add resp: ', resp)
     } catch (error) {

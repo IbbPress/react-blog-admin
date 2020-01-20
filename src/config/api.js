@@ -1,16 +1,16 @@
-import { GET, POST, DELETE  } from "./request";
+import { GET, POST, PUT, DELETE  } from "./request";
 
-export const getArticleList = () => GET('/getArticleList')
+export const getPostList    = () => GET('/posts')
 
-export const getPost     = id => GET('/getArticle/' + id)
+export const getPost        = id => GET('/posts/' + id)
 
-export const delPost = (id) => DELETE(`/post/${id}`)
+export const delPost        = (id) => DELETE(`/posts/${id}`)
 
-export const updatePost = (payload) => POST('/updatePost', payload)
+export const createPost     = (payload) => POST('/posts', payload)
 
-export const createPost = (payload) => POST('/post', payload)
+export const updatePost     = (payload) => PUT('/posts', payload)
 
-
-export const deleteArticle = (payload) => DELETE('/delArticle', payload)
+export const deleteArticle  = (payload) => DELETE('/posts' + payload.id)
 
 export const login = (payload) => POST('/login', payload)
+export const logout = () => POST('/logout')

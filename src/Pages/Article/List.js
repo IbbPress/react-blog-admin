@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Table, Popconfirm, Icon } from 'antd';
-import { getArticleList, delPost } from "../../config/api";
+import { getPostList, delPost } from "../../config/api";
 import dayjs from 'dayjs'
 const { Column } = Table;
 function List (props) {
@@ -10,7 +10,7 @@ function List (props) {
   const getList = async () => {
     try {
       setLoading(true)
-      const resp = await getArticleList();
+      const resp = await getPostList();
       setList(resp.data)
     } catch (error) {
       
