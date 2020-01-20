@@ -20,7 +20,7 @@ function List (props) {
   }
 
   const updateArticle = (id) => {
-    props.history.push(`/index/add/${id}`)
+    props.history.push(`/posts/edit/${id}`)
   }
   const delArticle = async (id) => {
     try {

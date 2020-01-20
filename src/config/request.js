@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { message } from 'antd';
 // import { HashRouter } from "react-router-dom";
-
+// import { BrowserHistory } from 'react-router'
 
 // 创建 axios 实例
 const request = axios.create({
@@ -10,13 +10,12 @@ const request = axios.create({
   timeout: 2000 // 请求超时时间
 });
 
-
 // 服务端响应失败处理函数
 const errHandle = error => {
   const { status } = error.response
   if (status === 401) {
     message.info('请登录');
-    // HashRouter.push('/login')
+    // BrowserHistory.push('/login')
   }
   return Promise.reject(error);
 };

@@ -1,13 +1,12 @@
 import React from "react";
-import { HashRouter as Router, Route, Redirect} from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
 
 function Main () {
   return (
     <Router>
-      <Redirect to="/index" />
-      <Route path="/index" component={Home} />
+      <Route path="/" component={Home} />
       <Route path="/login/" exact component={Login} />
     </Router>
   )

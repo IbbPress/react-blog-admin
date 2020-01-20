@@ -48,7 +48,7 @@ function Login (props) {
       setIsLoading(true);
       await login({ userName, password });
       message.success(`${welcome()}，欢迎回来`)
-      props.history.push('/index/list') 
+      props.history.push('/posts/list') 
     } catch (error) {
       message.success('登录失败')
     } finally {

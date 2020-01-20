@@ -3,7 +3,7 @@ import { Layout, Menu, Breadcrumb, Dropdown, Icon ,message, Avatar } from 'antd'
 import { Route, Link } from "react-router-dom";
 
 import ArticleList from "./Article/List";
-import ArticleAdd from "./Article/Edit";
+import Edit from "./Article/Edit";
 import Dashboard from "./Dashboard";
 import User from "./User";
 import Tags from "./Tags";
@@ -26,7 +26,7 @@ function Home (props) {
   //   if (e.key === 'addArticle') {
   //     props.history.push('/index/add')
   //   } else {
-  //     props.history.push('/index/list')
+  //     props.history.push('/posts/list')
   //   }
   // }
 
@@ -45,42 +45,42 @@ function Home (props) {
       <Menu defaultSelectedKeys={ ['1'] } mode="inline">
 
         <Menu.Item key="dashboard">
-          <Link to="/index">
+          <Link to="/dashboard">
             <Icon type="dashboard" />
             <span>工作台</span>
           </Link>
         </Menu.Item>
         
         <Menu.Item key="addArticle">
-          <Link to="/index/add">
+          <Link to="/posts/edit/">
             <Icon type="edit" />
             <span>写文章</span>
           </Link>
         </Menu.Item>
 
         <Menu.Item key="articleList">
-          <Link to="/index/list">
+          <Link to="/posts/list">
             <Icon type="unordered-list" />
             <span>文章列表</span>
           </Link>
         </Menu.Item>
 
         <Menu.Item key="tags">
-          <Link to="/index/tags">
+          <Link to="/posts/tags">
             <Icon type="tags" />
             <span>标签</span>
           </Link>
         </Menu.Item>
 
         <Menu.Item key="link">
-          <Link to="/index/links">
+          <Link to="/posts/links">
             <Icon type="link" />
             <span>友链管理</span>
           </Link>
         </Menu.Item>
 
         <Menu.Item key="user">
-          <Link to="/index/user">
+          <Link to="/posts/user">
             <Icon type="user" />
             <span>个人中心</span>
           </Link>
@@ -148,13 +148,13 @@ function Home (props) {
           
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
-              <Route path="/index/" exact  component={Dashboard} />
-              <Route path="/index/add/" exact   component={ArticleAdd} />
-              <Route path="/index/add/:id"  exact   component={ArticleAdd} />
-              <Route path="/index/list/"   component={ArticleList} />
-              <Route path="/index/links"   component={Links} />
-              <Route path="/index/user"   component={User} />
-              <Route path="/index/tags"   component={Tags} />
+              <Route path="/dashboard"  component={Dashboard} />
+              <Route path="/posts/list"   component={ArticleList} />
+              <Route path="/posts/edit/" exact   component={Edit} />
+              <Route path="/posts/edit/:id"  exact   component={Edit} />
+              <Route path="/posts/links"   component={Links} />
+              <Route path="/posts/user"   component={User} />
+              <Route path="/posts/tags"   component={Tags} />
             </div>
           </div>
 
