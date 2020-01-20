@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { message } from 'antd';
-// import { BrowserRouter } from "react-router-dom";
+// import { HashRouter } from "react-router-dom";
 
 
 // 创建 axios 实例
@@ -16,7 +16,7 @@ const errHandle = error => {
   const { status } = error.response
   if (status === 401) {
     message.info('请登录');
-    // BrowserRouter.push('/login')
+    // HashRouter.push('/login')
   }
   return Promise.reject(error);
 };
