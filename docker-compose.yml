@@ -1,0 +1,8 @@
+version: '3.3'
+
+#开始创建服务
+services:
+  webapp:
+    build: ./
+    ports:
+      - "8888:80"
