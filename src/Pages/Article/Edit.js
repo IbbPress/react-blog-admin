@@ -88,7 +88,7 @@ function Add(props) {
     let currTime = dayjs().unix();
     const payload = Object.assign({}, post, {
       title, content,
-      add_time: currTime,
+      create_time: currTime,
       // update_time: currTime,
     })
 

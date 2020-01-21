@@ -60,8 +60,8 @@ function List (props) {
       </Popconfirm>
     </span>
   )
-  const time = (add_time, record) => (
-    dayjs.unix(record.add_time).format('YYYY-MM-DD')
+  const time = (create_time, record) => (
+    dayjs.unix(record.create_time).format('YYYY-MM-DD')
   )
 
   return (
@@ -69,7 +69,7 @@ function List (props) {
       <h1>文章列表</h1>
       <Table dataSource={list} loading={loading} rowKey={record => record.id}>
         <Column title="标题" dataIndex="title" key="title" />
-        <Column title="发布时间" dataIndex="add_time" render={time} />
+        <Column title="发布时间" dataIndex="create_time" render={time} />
         <Column title="阅读次数" dataIndex="view_count" key="view_count" />
         <Column title="操作" key="action" render={actions} />
       </Table>
