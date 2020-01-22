@@ -1,8 +1,6 @@
 import axios from "axios";
 
 import { message } from 'antd';
-// import { HashRouter } from "react-router-dom";
-// import { BrowserHistory } from 'react-router'
 
 // 创建 axios 实例
 const request = axios.create({
@@ -15,7 +13,7 @@ const errHandle = error => {
   const { status } = error.response
   if (status === 401) {
     message.info('请登录');
-    // BrowserHistory.push('/login')
+    window.location.href = "/#/login"
   }
   return Promise.reject(error);
 };

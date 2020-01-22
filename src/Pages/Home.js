@@ -45,7 +45,7 @@ function Home (props) {
       <Menu defaultSelectedKeys={ ['1'] } mode="inline">
 
         <Menu.Item key="dashboard">
-          <Link to="/dashboard">
+          <Link to="/posts/dashboard">
             <Icon type="dashboard" />
             <span>工作台</span>
           </Link>
@@ -148,13 +148,13 @@ function Home (props) {
           
           <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
             <div>
-              <Route path="/dashboard"  component={Dashboard} />
-              <Route path="/posts/list"   component={ArticleList} />
+              <Route path="/posts/dashboard" exact component={Dashboard} />
+              <Route path="/posts/list"  exact component={ArticleList} />
               <Route path="/posts/edit/" exact   component={Edit} />
               <Route path="/posts/edit/:id"  exact   component={Edit} />
-              <Route path="/posts/links"   component={Links} />
-              <Route path="/posts/user"   component={User} />
-              <Route path="/posts/tags"   component={Tags} />
+              <Route path="/posts/links" exact  component={Links} />
+              <Route path="/posts/user" exact  component={User} />
+              <Route path="/posts/tags" exact  component={Tags} />
             </div>
           </div>
 

@@ -6,8 +6,8 @@ import Login from "./Login";
 function Main () {
   return (
     <Router>
-      <Route path="/" component={Home} />
-      <Route path="/login/" exact component={Login} />
+      <Route path="/posts/" component={Home} />
+      <Route path="/login/" component={Login} />
     </Router>
   )
 }
